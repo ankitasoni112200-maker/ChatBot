@@ -1,0 +1,1 @@
+{'username': 'ank123', 'password': 'ank@123', 'mobile_num': '8005822092', 'email': 'ankita@gmail.com'}
