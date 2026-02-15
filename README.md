@@ -35,9 +35,9 @@ It can perform real-time actions like searching on Google, YouTube, and Google M
   python chatbot.py
 
 ## 📂 Project Structure
-ChatBot/
-|---chatbot.py
-|---README.md
+chatbot/
+│── chatbot.py  
+│── README.md  
 
 ## 📈 Future Improvements
 - Add more intelligent responses
