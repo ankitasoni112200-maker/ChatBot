@@ -1,6 +1,6 @@
 # 🤖 ChatBot - Python Project
 
-## 📌 Description
+## 📌 Description 
 This is a simple ChatBot project developed using Python.
 The ChatBot interacts with users by responding to basic queries.
 It can perform real-time actions such as searching on Google, YouTube, and Google Maps.
