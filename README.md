@@ -3,21 +3,21 @@
 ## 📌 Description
 This is a simple ChatBot project developed using Python.
 The ChatBot interacts with users by responding to basic queries.
-It can perform real-time actions like searching on Google, YouTube, and Google Maps
+It can perform real-time actions such as searching on Google, YouTube, and Google Maps.
 
 ## 🚀 Features
-- Responds to various greetings
+- Responds to various greetings.
 - Answers predefined questions and anything that is not predefined, we can teach it.
-- Supports both text input and voice input
-- converts voice commands into actions
+- Supports both text input and voice input.
+- converts voice commands into actions.
 - Can search and open:
   - Google
   - YouTube
   - Google Maps
-- User-friendly interaction
+- User-friendly interaction.
 
 ## 🎤 Input Method
-- Text-based typing
+- Text-based typing.
 - Voice-based commands using a microphone.
 
 ## ⚙️ Technologies Used
@@ -41,9 +41,9 @@ chatbot/
 │── README.md  
 
 ## 📈 Future Improvements
-- Add more intelligent responses
-- Integrate basic NLP(Natural Languague Processing)
-- Improve UI design
+- Add more intelligent responses.
+- Integrate basic NLP(Natural Languague Processing).
+- Improve UI design.
 - Connect with the database for dynamic replies.
 
 ## 👩🏻‍💻 Author
