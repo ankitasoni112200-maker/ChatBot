@@ -1,19 +1,41 @@
 from tkinter import *
 from PIL import Image, ImageTk
 from tkinter import messagebox
-def register_details(username,password,mobile_number,email):
-        if username!="" and password!="" and mobile_number!="" and email!="":
-              d = {"username":username,
-                   "password":password,
-                   "mobile_num":mobile_number,
-                   "email":email}
-              file = open("user_details.txt", mode='w')
-              file.write(str(d))
-              messagebox.showinfo("User details saved", "Save Done!😉")
-              file.close()
-              signup_root.destroy()
-        else:
-              messagebox.showerror("Blank detected", "fill all the details and Try again")
+import os
+import sys
+
+
+# ---------------- RESOURCE PATH ----------------
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
+
+def register_details(username, password, mobile, email):
+
+    if username and password and mobile and email:
+
+        data = {
+            "username": username,
+            "password": password,
+            "mobile": mobile,
+            "email": email
+        }
+
+        file_path = resource_path("user_details.txt")
+
+        with open(file_path, "w") as file:
+            file.write(str(data))
+
+        messagebox.showinfo("Success", "Registration Successful")
+        signup_root.destroy()
+
+    else:
+        messagebox.showerror("Error", "Fill all details")
 
 def signup_page():
     global signup_root
@@ -25,7 +47,7 @@ def signup_page():
     main_frame = Frame(signup_root, bg="black")
     main_frame.place(relx=0.5, rely=0.5, anchor="center")
 
-    img = Image.open('signup_image.png')
+    img = Image.open(resource_path('signup_image.png'))
     img=img.resize((160,160))
     photoImg = ImageTk.PhotoImage(img)
     signup_label = Label(signup_root,
@@ -82,7 +104,7 @@ def signup_page():
     pass_entry.focus()
 
     mobilenumber_frame = Frame(signup_root, bg = 'black')
-    mobilenumber_frame.pack(pady = 15)
+    mobilenumber_frame.pack(pady = 20, padx= 20)
 
     mobilenumber_label = Label(mobilenumber_frame,
                    text = 'Mobile Number',
@@ -91,7 +113,7 @@ def signup_page():
                    font=('Arial',16,'bold'),
                    anchor = 'e'
                    )
-    mobilenumber_label.pack(side=LEFT, padx=0)
+    mobilenumber_label.pack(side=LEFT, padx=20)
 
     mobilenumber_entry = Entry(mobilenumber_frame,
                    fg ='white',
@@ -100,7 +122,7 @@ def signup_page():
                    relief = RAISED,
                    font = ('Arial',16,'bold'),
                    insertbackground='white')
-    mobilenumber_entry.pack(padx = 20)
+    mobilenumber_entry.pack()
     mobilenumber_entry.focus()
 
     email_frame = Frame(signup_root, bg = 'black')
@@ -142,4 +164,3 @@ def signup_page():
     register_btn.pack(side = LEFT, padx = 20)
 
     signup_root.mainloop()
-
