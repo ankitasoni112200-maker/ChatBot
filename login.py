@@ -1,50 +1,66 @@
-from tkinter import * #GUI
+from tkinter import *
 from PIL import Image, ImageTk
-import signup
 from tkinter import messagebox
 import os
+import sys
+import signup
 import main_app
 
+
+# ---------------- RESOURCE PATH ----------------
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
+
+# ---------------- USER DETAILS ----------------
+
 user_details = {}
+
 def load_user_details():
     global user_details
-    if os.path.exists("./user_details.txt"):
-        file = open('./user_details.txt', 'r')
-        user_details = eval(file.read())
-        print(user_details)
-        #print(type(user_details))
-        file.close()
-    else:
-        print("no file found to login")
+    file_path = resource_path("user_details.txt")
 
+    if os.path.exists(file_path):
+        with open(file_path, 'r') as file:
+            user_details = eval(file.read())
+    else:
+        user_details = {}
+
+
+# ---------------- LOGIN FUNCTION ----------------
 
 def login_btn(username, password):
-    global user_details
-    if username !="" and password != "":
-        if user_details == {}:
-            load_user_details()
-        if username == user_details['username'] and password == user_details['password']:
-             messagebox.showinfo("Login Successful", "Welcome to the Project")
-             root.destroy()
-             main_app.my_app_gui() # chatbot screen
-        else:
-            messagebox.showerror("Login failed", "username and password didn't match")
+    load_user_details()
 
+    if username != "" and password != "":
+        if username == user_details.get("username") and password == user_details.get("password"):
+            messagebox.showinfo("Login Successful", "Welcome to the Project")
+            root.destroy()
+            main_app.my_app_gui()
+        else:
+            messagebox.showerror("Login Failed", "Username and Password didn't match")
     else:
-        messagebox.showwarning("Blank detected", "Kindly fill all the details")
+        messagebox.showwarning("Blank Detected", "Please fill all details")
+
 
 def open_signup():
     root.destroy()
     signup.signup_page()
 
 
+# ---------------- GUI ----------------
 
 root = Tk() #WIN
 root.geometry("1920x1080")
 root.config(bg="dimgray")
 root.title("Login")
 
-img = Image.open('image_logo.png')
+img = Image.open(resource_path('image_logo.png'))
 img=img.resize((200,200))
 photoImg = ImageTk.PhotoImage(img)
 login_label = Label(root,
@@ -81,8 +97,7 @@ user_entry = Entry(user_frame,
 user_entry.pack(side = LEFT, padx = 5, pady = 5)
 user_entry.focus()
 
-user_icon = ImageTk.PhotoImage(Image.open("user_icon.png").resize((25,25)))
-
+user_icon = ImageTk.PhotoImage(Image.open(resource_path("user_icon.png")).resize((25,25)))
 def user():
     if pass_entry.cget("show") == "":
         eye_btn.config(image = user_icon)
@@ -115,8 +130,8 @@ pass_entry = Entry(pass_frame,
 pass_entry.pack(side = LEFT, padx = 5, pady = 5)
 pass_entry.focus()
 
-eye_open = ImageTk.PhotoImage(Image.open("open_eye.jpg").resize((25,25)))
-eye_close = ImageTk.PhotoImage(Image.open("close_eye.png").resize((25,25)))
+eye_open = ImageTk.PhotoImage(Image.open(resource_path("open_eye.jpg")).resize((25,25)))
+eye_close = ImageTk.PhotoImage(Image.open(resource_path("close_eye.png")).resize((25,25)))
 
 def toggle_password():
     if pass_entry.cget("show") == "":
@@ -159,5 +174,4 @@ btn_signup = Button(btn_frame,
                    activeforeground='white'
                    )
 btn_signup.pack()
-
 root.mainloop()
