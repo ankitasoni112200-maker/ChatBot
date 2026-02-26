@@ -7,30 +7,43 @@ import pandas as pd
 import pywhatkit
 import voice_recognition
 import speech_output
+import sys
+
+# ---------------- RESOURCE PATH (EXE SAFE) ----------------
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
+# ---------------- FILE PATHS ----------------
+
+FILE_NAME = resource_path("chatbot_data.txt")
 
 webbrowser_list = ['google', 'youtube', 'facebook', 'google maps']
 
-FILE_NAME = "chatbot_data.txt"
+# ---------------- LOAD DATA ----------------
 
-# --- Load saved Q&A data ---
 def load_data():
     data = {}
     if os.path.exists(FILE_NAME):
-        with open(FILE_NAME, 'r') as file:
+        with open(FILE_NAME, 'r', encoding="utf-8") as file:
             for line in file:
                 if "|" in line:
                     q, a = line.strip().split('|', 1)
                     data[q.lower()] = a
     return data
 
+# ---------------- SAVE DATA ----------------
 
-# --- Save Q&A ---
 def save_data(q, a):
-    with open(FILE_NAME, 'a') as file:
+    with open(FILE_NAME, 'a', encoding="utf-8") as file:
         file.write(f"\n{q}|{a}")
 
+# ---------------- IMPORT FILE ----------------
 
-# --- Import CSV or TXT file ---
 def import_data_file():
     global data
     file_path = filedialog.askopenfilename(
@@ -64,8 +77,8 @@ def import_data_file():
     except Exception as e:
         messagebox.showerror("❌ Error", f"Failed to import data:\n{e}")
 
+# ---------------- TEACH BOT ----------------
 
-# --- Teaching window if bot doesn't know ---
 def teach_bot(question):
     def save_answer():
         ans = ans_entry.get().strip()
@@ -155,9 +168,9 @@ def send():
         teach_bot(user_msg)
 
     chat_entry.delete(0, END)
-                                        
 
-# --- Main App GUI ---
+# ---------------- MAIN GUI ----------------
+
 def my_app_gui():
     global chat_entry, chat, new_win
 
@@ -166,7 +179,7 @@ def my_app_gui():
     new_win.geometry("1920x1080")
     new_win.config(bg='dimgray')
 
-    chat_bot_img = Image.open(r'chatbot.3D.webp')
+    chat_bot_img = Image.open(resource_path('chatbot.3D.webp'))
     chat_bot_img = chat_bot_img.resize((200, 200))
     final_image = ImageTk.PhotoImage(image=chat_bot_img)
     chat_label = Label(
