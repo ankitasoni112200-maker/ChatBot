@@ -34,6 +34,9 @@ It can perform real-time actions such as searching on Google, YouTube, and Googl
 - Run the file:
   Python chatbot.py
 - I have also created a desktop application for this project to run it directly.
+  ## 📥 Download EXE
+
+[Click Here to Download Windows EXE](https://github.com/ankitasoni112200-maker/ChatBot/releases)
 
 ## 📂 Project Structure
 chatbot/
