@@ -32,7 +32,8 @@ It can perform real-time actions such as searching on Google, YouTube, and Googl
   git clone https://github.com/ankitasoni112200-maker/ChatBot.git
 - Open the project file
 - Run the file:
-  python chatbot.py
+  Python chatbot.py
+- I have also created a desktop application for this project to run it directly.
 
 ## 📂 Project Structure
 chatbot/
@@ -45,6 +46,7 @@ chatbot/
 - Integrate basic NLP(Natural Languague Processing).
 - Improve UI design.
 - Connect with the database for dynamic replies.
+- Mobile App version.
 
 ## 👩🏻‍💻 Author
 Ankita Soni
